@@ -67,6 +67,9 @@ class _SignUpPageState extends State<SignUpPage> {
         } else {
           Navigator.pop(context);
         }
+
+        //  Navigator.push(context, MaterialPageRoute(builder: (_) => LoginPage()));
+
       }
     }
   }
