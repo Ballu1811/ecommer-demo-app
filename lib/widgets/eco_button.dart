@@ -4,8 +4,14 @@ class EcoButton extends StatelessWidget {
   String? title;
   bool? isLoginButton;
   VoidCallback? onPress;
+  bool? isLoading;
 
-  EcoButton({Key? key, this.title, this.isLoginButton = false, this.onPress})
+  EcoButton(
+      {Key? key,
+      this.title,
+      this.isLoading = false,
+      this.isLoginButton = false,
+      this.onPress})
       : super(key: key);
 
   @override
@@ -21,14 +27,27 @@ class EcoButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
                 color: isLoginButton == false ? Colors.black : Colors.white)),
-        child: Center(
-          child: Text(
-            title ?? "button",
-            style: TextStyle(
-              color: isLoginButton == false ? Colors.black : Colors.white,
-              fontSize: 16,
+        child: Stack(
+          children: [
+            Visibility(
+              visible: isLoading! ? false : true,
+              child: Center(
+                child: Text(
+                  title ?? "button",
+                  style: TextStyle(
+                    color: isLoginButton == false ? Colors.black : Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ),
-          ),
+            Visibility(
+              visible: isLoading!,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          ],
         ),
       ),
     );

@@ -5,14 +5,18 @@ class EcoTextField extends StatefulWidget {
   TextEditingController? controller;
   String? Function(String?)? validate;
   bool isPassword;
-  IconData? icon;
+  Widget? icon;
   bool check;
+  final TextInputAction? inputAction;
+  final FocusNode? focusNode;
   EcoTextField({
     this.hintText,
     this.controller,
     this.validate,
     this.isPassword = false,
     this.icon,
+    this.inputAction,
+    this.focusNode,
     this.check = false,
   });
 
@@ -21,20 +25,7 @@ class EcoTextField extends StatefulWidget {
 }
 
 class _EcoTextFieldState extends State<EcoTextField> {
-  List<bool> isP = [false, false, false];
-
-  Icon iconChecker() {
-    if (widget.isPassword == true) {
-      return const Icon(Icons.visibility);
-    } else if (widget.isPassword == false &&
-        widget.hintText == "Enter email...") {
-      return const Icon(Icons.email);
-    } else if (widget.isPassword == false) {
-      return const Icon(Icons.visibility_off);
-    }
-    return const Icon(Icons.abc);
-  }
-
+  bool visible = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,26 +35,15 @@ class _EcoTextFieldState extends State<EcoTextField> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
+        focusNode: widget.focusNode,
+        textInputAction: widget.inputAction,
         controller: widget.controller,
         obscureText: widget.isPassword == false ? false : widget.isPassword,
         validator: widget.validate,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: widget.hintText ?? 'hint text...',
-          suffixIcon: IconButton(
-            onPressed: () {
-              if (widget.isPassword == false) {
-                setState(() {
-                  widget.isPassword = true;
-                });
-              } else {
-                setState(() {
-                  widget.isPassword = false;
-                });
-              }
-            },
-            icon: iconChecker(),
-          ),
+          suffixIcon: widget.icon,
           contentPadding: const EdgeInsets.all(10),
         ),
       ),
