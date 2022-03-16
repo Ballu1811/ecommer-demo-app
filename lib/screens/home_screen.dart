@@ -6,16 +6,17 @@ import 'package:food_app_demo/widgets/eco_button.dart';
 
 import '../widgets/home_cards.dart';
 
+List categories = [
+  "GROCERY",
+  "ELECTRONICS",
+  "COSMETICS",
+  "PHARMACY",
+  "GARMENTS",
+  "LAPTOPS"
+];
+
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
-  List categories = [
-    "GROCERY",
-    "ELECTRONICS",
-    "COSMETICS",
-    "PHARMACY",
-    "GARMENTS",
-    "LAPTOPS"
-  ];
 
   final List images = [
     "https://cdn.pixabay.com/photo/2016/03/02/20/13/grocery-1232944_960_720.jpg",

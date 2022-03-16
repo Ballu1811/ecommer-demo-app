@@ -1,6 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseServices {
+  static Future<DocumentSnapshot> adminSignIn(id) async {
+    var result = FirebaseFirestore.instance.collection("admin").doc(id).get();
+    return result;
+  }
+
   static Future<String?> createAccount(
     String email,
     String password,

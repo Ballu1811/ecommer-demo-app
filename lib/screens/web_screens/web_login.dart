@@ -1,24 +1,56 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app_demo/screens/web_screens/main_adminpage.dart';
+import 'package:food_app_demo/screens/web_screens/web_adminpage.dart';
+import 'package:food_app_demo/services/firebase_services.dart';
 import 'package:food_app_demo/utils/style.dart';
 import 'package:food_app_demo/widgets/eco_button.dart';
+import 'package:food_app_demo/widgets/eco_dialog.dart';
 import 'package:food_app_demo/widgets/ecotextfield.dart';
 import 'package:sizer/sizer.dart';
 
-class WebLoginPage extends StatelessWidget {
-  // const WebLoginPage({Key? key}) : super(key: key);
-  TextEditingController emailC = TextEditingController();
-  TextEditingController passC = TextEditingController();
-  final formKey = GlobalKey<FormState>();
-  String email = "admin@gmail.com";
-  String pass = "admin123";
+class WebLoginPage extends StatefulWidget {
+  static const String id = "weblogin";
+  @override
+  State<WebLoginPage> createState() => _WebLoginPageState();
+}
 
-  submit(BuildContext context) {
+class _WebLoginPageState extends State<WebLoginPage> {
+  // const WebLoginPage({Key? key}) : super(key: key);
+  TextEditingController userNameC = TextEditingController();
+
+  TextEditingController passC = TextEditingController();
+
+  final formKey = GlobalKey<FormState>();
+  bool formStateLoading = false;
+
+  submit(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      if (emailC.text == email && passC.text == pass) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => WebAdminPage()));
-      }
+      setState(() {
+        formStateLoading = true;
+      });
+      await FirebaseServices.adminSignIn(userNameC.text).then((value) async {
+        if (value['username'] == userNameC.text &&
+            value['password'] == passC.text) {
+          try {
+            UserCredential user =
+                await FirebaseAuth.instance.signInAnonymously();
+            if (user != null) {
+              Navigator.pushReplacementNamed(context, WebAdminPage.id);
+            }
+          } catch (e) {
+            setState(() {
+              formStateLoading = false;
+            });
+            showDialog(
+                context: context,
+                builder: (_) {
+                  return EcoDialogue(
+                    title: e.toString(),
+                  );
+                });
+          }
+        }
+      });
     }
   }
 
@@ -43,16 +75,16 @@ class WebLoginPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text(
-                    "WELCOME ADMIN PANEL",
+                    "WELCOME ADMIN PAGE",
                     style: EcoStyle.boldStyle,
                   ),
                   const Text(
-                    "Login To Your Admin Account",
+                    "Login With Admin Account",
                     style: EcoStyle.boldStyle,
                   ),
                   EcoTextField(
-                    controller: emailC,
-                    hintText: "Enter email...",
+                    controller: userNameC,
+                    hintText: "User Name...",
                     validate: (v) {
                       if (v!.isEmpty) {
                         return "email should not be empty";
@@ -73,6 +105,7 @@ class WebLoginPage extends StatelessWidget {
                   ),
                   EcoButton(
                     isLoginButton: true,
+                    isLoading: formStateLoading,
                     onPress: () {
                       submit(context);
                     },
