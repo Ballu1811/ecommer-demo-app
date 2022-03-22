@@ -30,6 +30,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   TextEditingController priceC = TextEditingController();
   TextEditingController discountPriceC = TextEditingController();
   TextEditingController serialCodeC = TextEditingController();
+  TextEditingController brandC = TextEditingController();
+
   bool isOnSale = false;
   bool isPopular = false;
   bool isFavourite = false;
@@ -135,6 +137,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     return null;
                   },
                 ),
+                EcoTextField(
+                  controller: brandC,
+                  hintText: "Enter Product Brand...",
+                  validate: (v) {
+                    if (v!.isEmpty) {
+                      return "should not be empty";
+                    }
+                    return null;
+                  },
+                ),
                 EcoButton(
                   title: "PICK IMAGES",
                   onPress: () {
@@ -231,6 +243,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     await Products.addProducts(Products(
       category: selectedValue,
       id: uuid.v4(),
+      brand: brandC.text,
       productName: productNameC.text,
       productDetail: productDetailC.text,
       price: int.parse(priceC.text),
@@ -264,7 +277,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   clearField() {
     setState(() {
-      selectedValue = "";
+      // selectedValue = "";
       productNameC.clear();
       productDetailC.clear();
       priceC.clear();

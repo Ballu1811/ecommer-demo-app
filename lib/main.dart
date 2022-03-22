@@ -8,7 +8,6 @@ import 'package:food_app_demo/screens/login_screen.dart';
 import 'package:food_app_demo/screens/web_screens/addProduct_screen.dart';
 import 'package:food_app_demo/screens/web_screens/dashboard_screen.dart';
 import 'package:food_app_demo/screens/web_screens/delete_product_screen.dart';
-import 'package:food_app_demo/screens/web_screens/update_complete_screen.dart';
 import 'package:food_app_demo/screens/web_screens/update_product_screen.dart';
 import 'package:food_app_demo/screens/web_screens/web_adminpage.dart';
 import 'package:food_app_demo/screens/web_screens/web_login.dart';
@@ -55,7 +54,6 @@ class MyApp extends StatelessWidget {
           UpdateProductScreen.id: (context) => UpdateProductScreen(),
           DeleteProductScreen.id: (context) => DeleteProductScreen(),
           DashboardScreen.id: (context) => DashboardScreen(),
-          UpdateCompleteScreen.id: (context) => UpdateCompleteScreen(),
         },
       ),
     );

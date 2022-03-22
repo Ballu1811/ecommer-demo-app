@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app_demo/services/firebase_services.dart';
 import 'package:food_app_demo/utils/style.dart';
+import 'package:food_app_demo/widgets/category_home_boxes.dart';
 import 'package:food_app_demo/widgets/eco_button.dart';
+import 'package:sizer/sizer.dart';
 
 import '../widgets/home_cards.dart';
 
@@ -33,12 +37,10 @@ class HomePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const Center(
-                child: Text(
-                  "Home Page",
-                  style: EcoStyle.boldStyle,
-                ),
+              Container(
+                child: Text("ECOMMERCE APP"),
               ),
+              const CategoryHomeBoxes(),
               CarouselSlider(
                   items: images
                       .map((e) => Stack(
@@ -92,12 +94,7 @@ class HomePage extends StatelessWidget {
                     height: 200,
                     autoPlay: true,
                   )),
-              HomeCards(title: categories[0]),
-              HomeCards(title: categories[1]),
-              HomeCards(title: categories[2]),
-              HomeCards(title: categories[3]),
-              HomeCards(title: categories[4]),
-              HomeCards(title: categories[5]),
+              Text("POPULAR ITEMS"),
             ],
           ),
         ),
