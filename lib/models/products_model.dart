@@ -15,18 +15,18 @@ class Products {
   bool? isFavourite;
 
   Products({
-    required this.category,
-    required this.id,
-    required this.productName,
-    required this.productDetail,
-    required this.brand,
-    required this.price,
-    required this.discountPrice,
-    required this.serialCode,
-    required this.imageUrls,
-    required this.isOnSale,
-    required this.isPopular,
-    required this.isFavourite,
+    this.category,
+    this.id,
+    this.productName,
+    this.productDetail,
+    this.brand,
+    this.price,
+    this.discountPrice,
+    this.serialCode,
+    this.imageUrls,
+    this.isOnSale,
+    this.isPopular,
+    this.isFavourite,
   });
 
   static Future<void> addProducts(Products products) async {

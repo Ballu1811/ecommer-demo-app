@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../models/category_model.dart';
 import '../../utils/style.dart';
 import '../../widgets/eco_button.dart';
 import '../../widgets/ecotextfield.dart';
@@ -93,7 +94,7 @@ class _UpdateCompleteScreenState extends State<UpdateCompleteScreen> {
                       value: selectedValue,
                       items: categories
                           .map((e) => DropdownMenuItem<String>(
-                              value: e, child: Text(e)))
+                              value: e.title, child: Text(e.title!)))
                           .toList(),
                       onChanged: (value) {
                         setState(() {

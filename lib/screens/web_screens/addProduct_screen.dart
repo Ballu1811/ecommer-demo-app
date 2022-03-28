@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../models/category_model.dart';
 import '../home_screen.dart';
 
 class AddProductScreen extends StatefulWidget {
@@ -76,8 +77,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     },
                     value: selectedValue,
                     items: categories
-                        .map((e) =>
-                            DropdownMenuItem<String>(value: e, child: Text(e)))
+                        .map((e) => DropdownMenuItem<String>(
+                            value: e.title, child: Text(e.title!)))
                         .toList(),
                     onChanged: (value) {
                       setState(() {
