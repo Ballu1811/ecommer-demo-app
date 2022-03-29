@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_app_demo/screens/landing_screen.dart';
 import 'package:food_app_demo/screens/layout_screen.dart';
-import 'package:food_app_demo/screens/login_screen.dart';
+import 'package:food_app_demo/screens/auth_screens/login_screen.dart';
 import 'package:food_app_demo/screens/web_screens/addProduct_screen.dart';
 import 'package:food_app_demo/screens/web_screens/dashboard_screen.dart';
 import 'package:food_app_demo/screens/web_screens/delete_product_screen.dart';

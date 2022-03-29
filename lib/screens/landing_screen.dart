@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app_demo/screens/home_screen.dart';
-import 'package:food_app_demo/screens/login_screen.dart';
+import 'package:food_app_demo/screens/bottom_navigation.dart';
+import 'package:food_app_demo/screens/bottom_screens/home_screen.dart';
+import 'package:food_app_demo/screens/auth_screens/login_screen.dart';
 import 'package:food_app_demo/utils/style.dart';
 
 class LandingPage extends StatelessWidget {
@@ -37,7 +38,7 @@ class LandingPage extends StatelessWidget {
                   if (user == null) {
                     return LoginPage();
                   } else {
-                    return HomePage();
+                    return BottomNavigationPage();
                   }
                 }
                 return Scaffold(

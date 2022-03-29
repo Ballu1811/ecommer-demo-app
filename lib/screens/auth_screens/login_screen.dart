@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:food_app_demo/screens/home_screen.dart';
-import 'package:food_app_demo/screens/signup_screen.dart';
+import 'package:food_app_demo/screens/bottom_screens/home_screen.dart';
+import 'package:food_app_demo/screens/auth_screens/signup_screen.dart';
 import 'package:food_app_demo/utils/style.dart';
 import 'package:food_app_demo/widgets/eco_button.dart';
 import 'package:food_app_demo/widgets/ecotextfield.dart';
 
-import '../services/firebase_services.dart';
+import '../../services/firebase_services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

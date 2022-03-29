@@ -12,7 +12,7 @@ import '../../models/category_model.dart';
 import '../../utils/style.dart';
 import '../../widgets/eco_button.dart';
 import '../../widgets/ecotextfield.dart';
-import '../home_screen.dart';
+import '../bottom_screens/home_screen.dart';
 
 class UpdateCompleteScreen extends StatefulWidget {
   String? id;

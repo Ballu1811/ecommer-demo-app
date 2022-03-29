@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app_demo/screens/login_screen.dart';
+import 'package:food_app_demo/screens/auth_screens/login_screen.dart';
 import 'package:food_app_demo/services/firebase_services.dart';
 import 'package:food_app_demo/utils/style.dart';
 import 'package:food_app_demo/widgets/eco_button.dart';

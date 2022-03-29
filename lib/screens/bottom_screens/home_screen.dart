@@ -10,7 +10,7 @@ import 'package:food_app_demo/widgets/category_home_boxes.dart';
 import 'package:food_app_demo/widgets/eco_button.dart';
 import 'package:sizer/sizer.dart';
 
-import '../widgets/home_cards.dart';
+import '../../widgets/home_cards.dart';
 
 // List categories = [
 //   "GROCERY",
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Container(
-              height: 23.h,
+              height: 18.h,
               child: Column(
                 children: [
                   Container(
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                   ]))),
                   const CategoryHomeBoxes(),
                   Container(
-                    height: 72.h,
+                    height: 64.h,
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
