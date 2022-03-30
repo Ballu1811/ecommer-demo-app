@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
           backgroundColor: Colors.white,
+          scaffoldBackgroundColor: Colors.white,
         ),
         home: LayoutScreen(),
         routes: {

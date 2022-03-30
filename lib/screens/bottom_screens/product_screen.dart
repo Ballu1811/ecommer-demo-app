@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app_demo/screens/product_details_screen.dart';
+import 'package:food_app_demo/widgets/header.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../models/products_model.dart';
 
@@ -21,25 +24,45 @@ class _ProductScreenState extends State<ProductScreen> {
         .collection("products")
         .get()
         .then((QuerySnapshot? snapshot) {
-      snapshot!.docs
-          .where((element) => element["category"] == widget.category)
-          .forEach((e) {
-        if (e.exists) {
-          for (var item in e["imageUrls"]) {
-            if (item.isNotEmpty) {
-              setState(() {
-                allProducts.add(
-                  Products(
-                    // id: id,
-                    productName: e["productName"],
-                    imageUrls: e["imageUrls"],
-                  ),
-                );
-              });
+      if (widget.category == null) {
+        snapshot!.docs.forEach((e) {
+          if (e.exists) {
+            for (var item in e["imageUrls"]) {
+              if (item.isNotEmpty) {
+                setState(() {
+                  allProducts.add(
+                    Products(
+                      id: e["id"],
+                      productName: e["productName"],
+                      imageUrls: e["imageUrls"],
+                    ),
+                  );
+                });
+              }
             }
           }
-        }
-      });
+        });
+      } else {
+        snapshot!.docs
+            .where((element) => element["category"] == widget.category)
+            .forEach((e) {
+          if (e.exists) {
+            for (var item in e["imageUrls"]) {
+              if (item.isNotEmpty) {
+                setState(() {
+                  allProducts.add(
+                    Products(
+                      id: e["id"],
+                      productName: e["productName"],
+                      imageUrls: e["imageUrls"],
+                    ),
+                  );
+                });
+              }
+            }
+          }
+        });
+      }
     });
   }
 
@@ -81,9 +104,12 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.category! ?? "all products"),
-      ),
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+          child: Header(
+            title: "${widget.category ?? "All Products"}",
+          ),
+          preferredSize: Size.fromHeight(5.h)),
       body: Column(
         children: [
           Padding(
@@ -106,17 +132,40 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
                 itemCount: allProducts.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    child: Column(
-                      children: [
-                        Image.network(
-                          allProducts[index].imageUrls!.last,
-                          height: 100,
-                          width: 100,
-                          fit: BoxFit.cover,
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => ProductDetailScreen(
+                                    id: allProducts[index].id,
+                                  )));
+                    },
+                    child: Container(
+                      /// constraints: BoxConstraints(minHeight: 120),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black)),
+                              child: Image.network(
+                                allProducts[index].imageUrls!.last,
+                                height: 100,
+                                width: 100,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Expanded(
+                                child: Text(
+                              allProducts[index].productName!,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(overflow: TextOverflow.ellipsis),
+                            )),
+                          ],
                         ),
-                        Text(allProducts[index].productName!),
-                      ],
+                      ),
                     ),
                   );
                 }),
