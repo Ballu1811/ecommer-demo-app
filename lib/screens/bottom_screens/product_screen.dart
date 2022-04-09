@@ -157,6 +157,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 fit: BoxFit.cover,
                               ),
                             ),
+                            SizedBox(height: 10),
                             Expanded(
                                 child: Text(
                               allProducts[index].productName!,

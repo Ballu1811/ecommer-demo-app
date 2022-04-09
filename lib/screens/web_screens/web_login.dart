@@ -63,9 +63,7 @@ class _WebLoginPageState extends State<WebLoginPage> {
         child: Container(
           decoration: BoxDecoration(
               border: Border.all(
-                color: Colors.black,
-                width: 3,
-              ),
+                color: Colors.black, width: 3),
               borderRadius: BorderRadius.circular(12)),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),

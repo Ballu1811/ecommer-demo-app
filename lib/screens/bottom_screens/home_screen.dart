@@ -4,13 +4,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app_demo/models/products_model.dart';
-import 'package:food_app_demo/services/firebase_services.dart';
 import 'package:food_app_demo/utils/style.dart';
 import 'package:food_app_demo/widgets/category_home_boxes.dart';
-import 'package:food_app_demo/widgets/eco_button.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../widgets/home_cards.dart';
 
 // List categories = [
 //   "GROCERY",
@@ -83,110 +79,113 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              height: 18.h,
-              child: Column(
-                children: [
-                  Container(
-                      child: RichText(
-                          text: const TextSpan(children: [
-                    TextSpan(
-                      text: "ECOMMERCE",
-                      style: TextStyle(
-                        fontSize: 27,
-                        color: Colors.deepPurple,
-                        fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              Container(
+                child: Column(
+                  children: [
+                    Container(
+                        child: RichText(
+                            text: const TextSpan(children: [
+                      TextSpan(
+                        text: "ECOMMERCE",
+                        style: TextStyle(
+                          fontSize: 27,
+                          color: Colors.deepPurple,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: "APP",
-                      style: TextStyle(
-                        fontSize: 27,
-                        color: Colors.black,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold,
+                      TextSpan(
+                        text: "APP",
+                        style: TextStyle(
+                          fontSize: 27,
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ]))),
-                  const CategoryHomeBoxes(),
-                  Container(
-                    height: 64.h,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          carousel(images: images),
-                          Text(
-                            "POPULAR ITEMS",
-                            style: TextStyle(
-                              fontSize: 25,
+                    ]))),
+                    const CategoryHomeBoxes(),
+                    Container(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            carousel(images: images),
+                            Text(
+                              "POPULAR ITEMS",
+                              style: TextStyle(
+                                fontSize: 25,
+                              ),
                             ),
-                          ),
-                          allProducts.length == 0
-                              ? CircularProgressIndicator()
-                              : PopularIItems(allProducts: allProducts),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.greenAccent,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(18.0),
-                                        child: Text(
-                                          "HOT \n SALES",
-                                          textAlign: TextAlign.center,
-                                          style: EcoStyle.boldStyle
-                                              .copyWith(fontSize: 20),
+                            allProducts.length == 0
+                                ? CircularProgressIndicator()
+                                : PopularIItems(allProducts: allProducts),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.greenAccent,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(18.0),
+                                          child: Text(
+                                            "HOT \n SALES",
+                                            textAlign: TextAlign.center,
+                                            style: EcoStyle.boldStyle
+                                                .copyWith(fontSize: 20),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(width: 10),
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.redAccent,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          "NEW ARRIVAL",
-                                          textAlign: TextAlign.center,
-                                          style: EcoStyle.boldStyle
-                                              .copyWith(fontSize: 20),
+                                  SizedBox(width: 10),
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.redAccent,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(18.0),
+                                          child: Text(
+                                            "NEW \n ARRIVAL",
+                                            textAlign: TextAlign.center,
+                                            style: EcoStyle.boldStyle
+                                                .copyWith(fontSize: 20),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                "TOP BRANDS",
+                                style: TextStyle(
+                                  fontSize: 25,
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                          Text(
-                            "TOP BRANDS",
-                            style: TextStyle(
-                              fontSize: 25,
-                            ),
-                          ),
-                          Brands(allProducts: allProducts),
-                        ],
+                            Brands(allProducts: allProducts),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -212,24 +211,40 @@ class PopularIItems extends StatelessWidget {
             .map((e) => Padding(
                   padding: const EdgeInsets.all(5),
                   child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.black),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.network(
-                              e.imageUrls!.first,
-                              height: 80,
-                              width: 80,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.black),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.network(
+                                e.imageUrls![0],
+                                height: 80,
+                                width: 80,
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(child: Text(e.productName!)),
-                      ],
+                          SizedBox(height: 2),
+                          Expanded(
+                              child: Container(
+                            width: 150,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                e.productName!,
+                                textAlign: TextAlign.center,
+                                style:
+                                    TextStyle(overflow: TextOverflow.ellipsis),
+                              ),
+                            ),
+                          )),
+                        ],
+                      ),
                     ),
                   ),
                 ))
@@ -250,7 +265,7 @@ class Brands extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 10.h,
+      height: 13.h,
       constraints: BoxConstraints(
         minWidth: 50,
       ),
@@ -274,18 +289,32 @@ class Brands extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.primaries[Random().nextInt(15)],
                               ),
-                              child: Text(
-                                e.brand![0],
-                                style: EcoStyle.boldStyle.copyWith(
-                                    color: Colors.white,
-                                    fontStyle: FontStyle.italic),
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Text(
+                                    e.brand![0],
+                                    style: EcoStyle.boldStyle.copyWith(
+                                        color: Colors.white,
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                ),
                               ),
                             ),
-                            Text(
-                              e.brand!,
-                              style: EcoStyle.boldStyle.copyWith(
-                                  color: Colors.white,
-                                  fontStyle: FontStyle.italic),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: Text(
+                                  e.brand!,
+                                  style: EcoStyle.boldStyle.copyWith(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontStyle: FontStyle.normal),
+                                ),
+                              ),
                             ),
                           ],
                         ),

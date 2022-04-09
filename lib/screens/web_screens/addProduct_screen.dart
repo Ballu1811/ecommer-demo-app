@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import 'package:sizer/sizer.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../models/category_model.dart';
-import '../bottom_screens/home_screen.dart';
 
 class AddProductScreen extends StatefulWidget {
   // const AddProductScreen({Key? key}) : super(key: key);
@@ -40,6 +38,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   String? selectedValue;
   bool isSaving = false;
   bool isUploading = false;
+
   final imagePicker = ImagePicker();
   List<XFile> images = [];
   List<String> imageUrls = [];

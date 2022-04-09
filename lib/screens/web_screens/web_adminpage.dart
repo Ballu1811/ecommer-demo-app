@@ -51,7 +51,7 @@ class _WebAdminPageState extends State<WebAdminPage> {
         ),
         sideBar: SideBar(
           backgroundColor: Colors.black,
-          textStyle: const TextStyle(color: Color(0xFfffffff), fontSize: 14),
+          textStyle: const TextStyle(color: Color(0xFfffffff), fontSize: 16),
           onSelected: (item) {
             chooseScreens(item);
           },
