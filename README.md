@@ -1,1 +1,1 @@
-# ecommer-demo-app
+# ecom-book-project
